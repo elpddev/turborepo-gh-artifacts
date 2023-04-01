@@ -36802,10 +36802,11 @@ async function startServer() {
     const port = process.env.PORT || DEFAULT_PORT;
     lib_default().ensureDirSync(cacheDir);
     const app = express_default()();
-    const serverToken = process.env.TURBO_TOKEN || (0,core.getInput)(Inputs.SERVER_TOKEN, {
-        required: true,
-        trimWhitespace: true,
-    });
+    const serverToken = process.env.TURBO_TOKEN ||
+        (0,core.getInput)(Inputs.SERVER_TOKEN, {
+            required: true,
+            trimWhitespace: true,
+        });
     // Used to cache the listArtifacts() call between GET requests
     let artifactList;
     app.all('*', (req, res, next) => {
@@ -36827,6 +36828,7 @@ async function startServer() {
                 // This avoids doing repeated requests with the same result.
                 artifactList = await artifactApi.listArtifacts();
             }
+            console.log(`Artifact list: ${artifactList.toString()}`);
             const existingArtifact = artifactList.artifacts?.find((artifact) => artifact.name === artifactId);
             if (existingArtifact) {
                 if (existingArtifact.expired) {
