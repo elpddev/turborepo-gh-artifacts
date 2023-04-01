@@ -36828,7 +36828,7 @@ async function startServer() {
                 // This avoids doing repeated requests with the same result.
                 artifactList = await artifactApi.listArtifacts();
             }
-            console.log(`Artifact list: ${artifactList.toString()}`);
+            console.log(`Artifact list: ${JSON.stringify(artifactList)}`);
             const existingArtifact = artifactList.artifacts?.find((artifact) => artifact.name === artifactId);
             if (existingArtifact) {
                 if (existingArtifact.expired) {
