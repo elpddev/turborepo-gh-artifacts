@@ -53,7 +53,7 @@ async function startServer() {
           artifactList = await artifactApi.listArtifacts();
         }
 
-        console.log(`Artifact list: ${artifactList.toString()}`);
+        console.log(`Artifact list: ${JSON.stringify(artifactList)}`);
 
         const existingArtifact = artifactList.artifacts?.find(
           (artifact) => artifact.name === artifactId
